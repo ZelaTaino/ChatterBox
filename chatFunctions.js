@@ -64,6 +64,8 @@ function sendMessage(){
 
 function enterRoom(){
   var user = document.getElementById("name").value;
+  document.getElementById("name").style.visibility = "hidden";
+  document.getElementById("enter_btn").style.visibility = "hidden"
   document.getElementById("chatrooms").style.visibility = "visible";
   document.getElementById("messaging").style.visibility = "visible";
 

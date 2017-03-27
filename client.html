@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
    <head>
-     <link rel="stylesheet" type="text/css" href="chat.css">
+     <!-- <link rel="stylesheet" type="text/css" href="chat.css"></link> -->
       <script src="/socket.io/socket.io.js"></script>
       <script src="chatFunctions.js"></script>
    </head>
    <body>
      <div id="userlist">
      <input type="text" id="name">
-     <button onclick="enterRoom()">Enter</button>
+     <button onclick="enterRoom()" id="enter_btn">Enter</button>
      <div id="currentusers"></div>
    </div>
    <hr>
@@ -25,7 +25,6 @@
       <button onclick="sendMessage()">send</button>
       <div id="chatlog"></div>
     </div>
-
 
    </body>
 </html>
