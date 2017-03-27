@@ -1,5 +1,9 @@
 #userlist {
-  display: inline-block;
-  float:right;
+  /*display: inline-block;
+  float:right;*/
 
+}
+
+#rooms {
+  float:right;
 }

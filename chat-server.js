@@ -1,6 +1,7 @@
 // Require the packages we will use:
 var users = [];
 var socketids = {};
+var rooms = {};
 var http = require("http"),
 	socketio = require("socket.io"),
 	fs = require("fs");
@@ -35,6 +36,12 @@ io.sockets.on("connection", function(socket){
 		socketids[socket.id] = data["newuser"];
 		users.push(data["newuser"]);
 		io.sockets.emit("user_entering",{newuser:socketids})
+	});
+	socket.on("create_chat", function(data) {
+		console.log("creator: "+data["creator"]);
+		console.log("room name: "+data["roomname"]);
+		io.sockets.emit("room_created", {roomname: data["roomname"]});
+
 	});
 	socket.on("disconnect", function() {
 		console.log("disconnecting from server");

@@ -27,6 +27,15 @@
         document.getElementById("chatlog").appendChild(document.createElement("hr"));
         document.getElementById("chatlog").appendChild(document.createTextNode(data["message"]));
       });
+      socketio.on("room_created", function(data) {
+        var name = data["roomname"];
+        var roomelement = document.createElement("p")
+        roomelement.setAttribute("id", name);
+        roomelement.innerHTML = name;
+        document.getElementById("rooms").appendChild(roomelement);
+        //document.getElementById("rooms").appendChild(document.createTextNode(data["roomname"]));
+        console.log(data["roomname"]);
+      });
 
       function createString(list) {
         var userstring = "";
@@ -48,8 +57,16 @@
       }
       function enterRoom(){
         var user = document.getElementById("name").value;
+        document.getElementById("chatrooms").style.visibility = "visible";
+        document.getElementById("messaging").style.visibility = "visible";
+
         currentuser = user;
         socketio.emit("user_entering", {newuser:user});
+      }
+      function createRoom() {
+        var name = document.getElementById("create_chat").value;
+        console.log(name);
+        socketio.emit("create_chat", {roomname:name, creator:currentuser})
       }
 
       </script>
@@ -57,14 +74,22 @@
    <body>
      <div id="userlist">
      <input type="text" id="name">
-     <button onclick="enterRoom()">Enter room</button>
+     <button onclick="enterRoom()">Enter</button>
      <div id="currentusers"></div>
    </div>
    <hr>
-   <div id="messaging">
+   <div id="chatrooms" style="visibility:hidden">
+     <input type="text" id="create_chat" />
+     <button onclick="createRoom()">Create chatroom</button>
+     <div id="rooms"></div><hr>
+   </div>
+
+   <div id="messaging" style="visibility:hidden">
       <input type="text" id="message_input"/>
       <button onclick="sendMessage()">send</button>
       <div id="chatlog"></div>
     </div>
+
+
    </body>
 </html>
