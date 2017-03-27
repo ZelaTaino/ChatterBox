@@ -6,6 +6,7 @@
       <script type ="text/javascript">
       //var users = [];
       var currentuser;
+      var currentroom = lobby;
       var socketio = io.connect();
       socketio.on("message_to_client",function(data) {
          //Append an HR thematic break and the escaped HTML of the new message
@@ -33,6 +34,7 @@
         roomelement.setAttribute("id", name);
         roomelement.innerHTML = name;
         document.getElementById("rooms").appendChild(roomelement);
+        currentroom = name;
         //document.getElementById("rooms").appendChild(document.createTextNode(data["roomname"]));
         console.log(data["roomname"]);
       });
@@ -52,7 +54,7 @@
       function sendMessage(){
          var msg = document.getElementById("message_input").value;
          var usr = currentuser;
-         //console.log(usr);
+
          socketio.emit("message_to_server", {message:msg, messagewriter:usr});
       }
       function enterRoom(){
@@ -81,7 +83,9 @@
    <div id="chatrooms" style="visibility:hidden">
      <input type="text" id="create_chat" />
      <button onclick="createRoom()">Create chatroom</button>
-     <div id="rooms"></div><hr>
+     <div id="rooms">
+     <p id="lobby">Lobby</p>
+   </div><hr>
    </div>
 
    <div id="messaging" style="visibility:hidden">
