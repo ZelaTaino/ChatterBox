@@ -34,6 +34,7 @@ socketio.on("room_created", function(data) {
   var roomelement = document.createElement("p")
   roomelement.setAttribute("id", name);
   roomelement.innerHTML = name;
+  console.log(name.roomname);
   document.getElementById("rooms").appendChild(roomelement);
   //document.getElementById("rooms").appendChild(document.createTextNode(data["roomname"]));
   console.log(data["roomname"]);

@@ -3,19 +3,46 @@ var users = [];
 var socketids = {};
 var rooms = {};
 var http = require("http"),
-	socketio = require("socket.io"),
-	fs = require("fs");
+	socketio = require("socket.io")
+	url = require('url'),
+	path = require('path'),
+	mime = require('mime'),
+	fs = require('fs');
 
 // Listen for HTTP connections.  This is essentially a miniature static file server that only serves our one file, client.html:
 var app = http.createServer(function(req, resp){
-	// This callback runs when a new connection is made to our HTTP server.
+	var filename = path.join(__dirname, "chatroom", url.parse(req.url).pathname);
+	(fs.exists || path.exists)(filename, function(exists){
+		if (exists) {
+			fs.readFile(filename, function(err, data){
+				if (err) {
+					// File exists but is not readable (permissions issue?)
+					resp.writeHead(500, {
+						"Content-Type": "text/plain"
+					});
+					resp.write("Internal server error: could not read file");
+					resp.end();
+					return;
+				}
 
-	fs.readFile("client.html", function(err, data){
-		// This callback runs when the client.html file has been read from the filesystem.
-
-		if(err) return resp.writeHead(500);
-		resp.writeHead(200);
-		resp.end(data);
+				// File exists and is readable
+				var mimetype = mime.lookup(filename);
+				resp.writeHead(200, {
+					"Content-Type": mimetype
+				});
+				resp.write(data);
+				resp.end();
+				return;
+			});
+		}else{
+			// File does not exist
+			resp.writeHead(404, {
+				"Content-Type": "text/plain"
+			});
+			resp.write("Requested file not found: "+filename);
+			resp.end();
+			return;
+		}
 	});
 });
 app.listen(3456);
@@ -39,10 +66,14 @@ io.sockets.on("connection", function(socket){
 	});
 	socket.on("create_chat", function(data) {
 		console.log("creator: "+data["creator"]);
+		var name = data["roomname"];
 		console.log("room name: "+data["roomname"]);
-		io.sockets.emit("room_created", {roomname: data["roomname"]});
+		createRoom(data["roomname"], data["creator"]);
+		//console.log(rooms);
+		io.sockets.emit("room_created", {roomname: rooms[name]});
 
 	});
+
 	socket.on("disconnect", function() {
 		console.log("disconnecting from server");
 		console.log(socket.id);
@@ -55,3 +86,12 @@ io.sockets.on("connection", function(socket){
 
 	});
 });
+
+function createRoom(roomname, maker) {
+	var room = {
+		roomname: roomname,
+		creator: maker,
+		users: [maker]
+	}
+	rooms[roomname] = room
+}
