@@ -1,6 +1,8 @@
 //var users = [];
 var currentuser;
 var socketio = io.connect();
+var login_page = $("#login_screen");
+var mainscreen = $("sidePanel");
 
 //sends messages
 socketio.on("message_to_client",function(data) {
@@ -21,6 +23,9 @@ socketio.on("user_entering", function(data) {
 
 //someone quits window
 socketio.on("change_message", function(data) {
+  var li = document.createElement("li");
+  var circle = document.createElement("div");
+  circle.setAttribute("id", "circle");
   console.log(data["roomlist"]);
   console.log(data["message"]);
   document.getElementById("currentusers").innerHTML = createString(data["roomlist"]);
@@ -53,6 +58,21 @@ function createString(list) {
   console.log(userstring);
   return userstring
 }
+
+$(document).on("click", "#login_btn", function() {
+  var username = document.getElementById("login_name").value;
+  if (username.length > 2) {
+    $("#login_screen").fadeOut();
+    $("#sidePanel").show();
+    document.getElementById('username').innerHTML = username;
+    console.log("Entering");
+  }
+
+});
+$(document).on("click", ".add-btn", function () {
+  $("#sidePanel").hide();
+  $("#")
+});
 
 //Send message
 function sendMessage(){

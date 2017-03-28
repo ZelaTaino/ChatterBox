@@ -36,8 +36,18 @@ li a{
 	text-decoration: none;
 	padding: 5px 20px;
 }
+#addChat {
+  display: none;
+}
 
+#login_screen {
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  position: absolute;
+}
 #sidePanel{
+  display: none;
 	height: 100%;
 	width: 200px;
 	background-color: darkslategray;
@@ -92,10 +102,3 @@ li a{
       display: inline-block;
       margin-right: 5px;
     }
-
-
-
-
-
-
-
