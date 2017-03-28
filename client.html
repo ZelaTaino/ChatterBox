@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
    <head>
-     <!-- <link rel="stylesheet" type="text/css" href="chat.css"></link> -->
+     <link rel="stylesheet" type="text/css" href="chat.css"></link>
       <script src="/socket.io/socket.io.js"></script>
       <script src="chatFunctions.js"></script>
    </head>
    <body>
-     <div id="userlist">
+<!--      <div id="userlist">
      <input type="text" id="name">
      <button onclick="enterRoom()" id="enter_btn">Enter</button>
      <div id="currentusers"></div>
@@ -24,18 +24,54 @@
       <input type="text" id="message_input"/>
       <button onclick="sendMessage()">send</button>
       <div id="chatlog"></div>
-    </div>
-
-
-<!--     <div id="sidePanel">
-      <div id="title">Title</div>
-      <div id="channels">
-        Channels
-      </div>
-      <div id="directMessages">
-        Direct Messages
-      </div>
     </div> -->
+
+    <div id="sidePanel">
+      <div id="title">
+        <h1>ChatterBox</h1>
+        <div id="circle"></div>
+        <p id="username">zelataino</p>
+      </div>
+      <div id="channels" class="sidePanelSection">
+        <button class="add-btn">+</button>
+        <h2>CHANNELS</h2>
+        <ul>
+          <li>
+            <a href="https://google.com"># cse330</a>
+          </li>
+          <li>
+            <a href="https://google.com"># wics</a>
+          </li>
+          <li>
+            <a href="https://google.com"># basketball</a>
+          </li>
+        </ul>
+      </div>
+      <div id="directMessages" class="sidePanelSection">
+        <button class="add-btn">+</button>
+        <h2>DIRECT MESSAGES</h2>
+        <ul>
+          <li>
+            <a href="https://google.com">
+              <div id="circle"></div>
+              amprince
+            </a>
+          </li>
+          <li>
+            <a href="https://google.com">
+              <div id="circle"></div>
+              becca.siow
+            </a>
+          </li>
+          <li>
+            <a href="https://google.com">
+              <div id="circle"></div>
+              b.little
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
 
    </body>
