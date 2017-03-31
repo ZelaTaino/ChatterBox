@@ -83,7 +83,9 @@ socketio.on("room_created", function(data) {
 
 $(document).on("click", "#login_btn", function() {
   var username = document.getElementById("login_name").value;
+  console.log(username);
   if (username.length > 2) {
+    console.log("Enterring");
     $("#login_screen").fadeOut();
     $("#sidePanel").show();
     currentuser = username;
@@ -91,7 +93,6 @@ $(document).on("click", "#login_btn", function() {
     document.getElementById('username').innerHTML = username;
     console.log("Entering");
   }
-
 });
 
 // $(document).on("click", ".add-btn", function () {
@@ -156,23 +157,28 @@ function addUser(username)  {
 
 function createRoomElement (roomname) {
   var li = document.createElement("li");
-  var a = document.createElement("a");
-  a.setAttribute("id", roomname);
-  a.href = "";
-  a.setAttribute("class", "rooms");
-  a.innerHTML = "# " + roomname;
-  li.appendChild(a);
+  var span = document.createElement("span");
+  span.setAttribute("id", roomname);
+  // a.href = "";
+  span.setAttribute("class", "rooms");
+  span.innerHTML = "# " + roomname;
+  li.appendChild(span);
   document.getElementById("chatrooms").appendChild(li);
 
 }
 
 
 $(document).on("click", ".rooms", function() {
+  console.log("room func");
   currentroom = event.target.id;
   console.log(currentroom);
-  document.getElementById("chat-channel").innerHTML = currentroom;
+  document.getElementById("chat-channel").innerHTML = "# " + currentroom;
+  $("#login-view.fullscreen-view").hide();
+  $(".wrapper").show();
 }
 );
+
+
 
 
 

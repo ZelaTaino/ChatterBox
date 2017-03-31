@@ -56,15 +56,22 @@ ul {
 	padding: 0;
 }
 
+li span {
+  color: #80b3b3;
+	text-decoration: none;
+	padding: 5px 20px;
+
+}
 li:hover{
 	background-color: #132020;
 }
 
+/*
 li a{
 	color: #80b3b3;
 	text-decoration: none;
 	padding: 5px 20px;
-}
+}*/
 #addChat {
   display: none;
 }

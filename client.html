@@ -7,6 +7,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
+
    </head>
    <body>
     <div class="wrapper">
@@ -21,7 +22,8 @@
 	        <h2>CHANNELS</h2>
 	        <ul id="chatrooms">
 	          <li>
-	            <a href="" class="rooms" id="lobby"># lobby</a>
+              <span id="lobby" class="rooms"> # lobby</span>
+	            <!-- <a href="" class="rooms" id="lobby"># lobby</a> -->
 	          </li>
 	          <!-- <li>
 	            <a href=""># wics</a>
@@ -36,7 +38,7 @@
 	        <h2>DIRECT MESSAGES</h2>
 	        <ul>
 	          <li>
-	            <a href="">
+	            <!-- <a href="">
 	              <div id="circle"></div>
 	              amprince
 	            </a>
@@ -51,7 +53,7 @@
 	            <a href="">
 	              <div id="circle"></div>
 	              b.little
-	            </a>
+	            </a> -->
 	          </li>
 	        </ul>
 	      </div>
@@ -94,8 +96,9 @@
             <input type="text" name="login" id="login_name">
           </div>
       </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="chatFunctions.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="chatFunctions.js"></script>
    </body>
+
 
 </html>
