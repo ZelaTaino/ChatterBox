@@ -22,23 +22,23 @@ socketio.on("message_to_client", function(data) {
 });
 
 //user enter chatroom
-socketio.on("user_entering", function(data) {
-  var x = document.createElement("p");
-  var users = data['newuser'];
-  console.log(users);
-  for (var key in users) {
-    if (users.hasOwnProperty(key)) {
-      console.log(key + " -> " + users[key]);
-      if (users[key] != currentuser) {
-        addUser(users[key]);
-
-      }
-    }
-  }
-
-  // document.getElementById("currentusers").innerHTML = createString(users);
-  //document.getElementById("currentusers").appendChild(document.createTextNode(userstring));
-});
+// socketio.on("user_entering", function(data) {
+//   var x = document.createElement("p");
+//   var users = data['newuser'];
+//   console.log(users);
+//   for (var key in users) {
+//     if (users.hasOwnProperty(key)) {
+//       console.log(key + " -> " + users[key]);
+//       if (users[key] != currentuser) {
+//         addUser(users[key]);
+//
+//       }
+//     }
+//   }
+//
+//   // document.getElementById("currentusers").innerHTML = createString(users);
+//   //document.getElementById("currentusers").appendChild(document.createTextNode(userstring));
+// });
 
 //someone quits window
 socketio.on("change_message", function(data) {
@@ -144,7 +144,7 @@ function addUser(username)  {
   circle.setAttribute("id", "circle");
   li.appendChild(circle);
   li.innerHTML = username;
-  document.getElementById("userlist").appendChild(li);
+  // document.getElementById("userlist").appendChild(li);
   console.log(username);
 
 }
@@ -177,6 +177,8 @@ $(document).on("click", ".rooms", function() {
   $(".wrapper").show();
 }
 );
+
+
 
 
 
@@ -241,7 +243,7 @@ $("#login_name").keyup(function(e){
     $(".wrapper").show();
     currentuser = user;
     currentroom = lobby;
-    socketio.emit("user_entering", {newuser: user});
+    socketio.emit("user_entering", {newuser: user, room: lobby});
     document.getElementById('username').innerHTML = user;
     // console.log("Entering");
     // console.log(currentuser);
