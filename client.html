@@ -37,8 +37,10 @@
 
 </div>
 <div id="addChat">
-  <input type="text" id="roomname">
-  <button id="newroom">Add Room</button>
+  <input type="text" id="roomname" placeholder="Room name">
+  <!-- Would you like to make this room private
+  <button id="newroom">Add Room</button> -->
+
 </div>
 <div id="sidePanel">
   <div id="title">
@@ -49,9 +51,9 @@
   <div id="channels" class="sidePanelSection">
     <button class="add-btn">+</button>
     <h2>CHANNELS</h2>
-    <ul>
+    <ul id="chatrooms">
       <li>
-        <a href="https://google.com"># Lobby</a>
+        <p id="lobby"># Lobby</a>
       </li>
       <!-- <li>
         <a href="https://google.com"># wics</a>
@@ -64,8 +66,9 @@
   <div id="directMessages" class="sidePanelSection">
     <button class="add-btn">+</button>
     <h2>DIRECT MESSAGES</h2>
-    <ul>
-      <li>
+    <ul id="userlist">
+
+      <!-- <li>
         <a href="https://google.com">
           <div id="circle"></div>
           amprince
@@ -82,7 +85,7 @@
           <div id="circle"></div>
           b.little
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
