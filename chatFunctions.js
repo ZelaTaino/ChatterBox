@@ -171,4 +171,6 @@ $("#message-textarea").keyup(function(e){
   }
 });
 
+$().on();
+
 
