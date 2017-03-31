@@ -9,6 +9,23 @@
 }
 */
 
+body{
+	margin: 0;
+	user-select: none;
+	padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    flex-direction: column;
+    height: 100%;
+    min-width: 768px;
+	display: flex;
+
+	font-family: "Avenir", sans-serif;
+	font-size: 13pt;
+	color: #80b3b3;
+	font-weight: 300;
+}
+
 h1{
 	margin: 0;
 	color: white;
@@ -37,20 +54,28 @@ li a{
 	padding: 5px 20px;
 }
 
+.container{
+	height: 100%;
+	overflow: auto;
+}
+
 #sidePanel{
 	height: 100%;
 	width: 200px;
+	float: left;
 	background-color: darkslategray;
 	position: fixed;
 	z-index: 1;
 	top: 0;
 	left: 0;
 	padding: 20px 20px 20px 0px;
+	display: block;
+}
 
-	font-family: "Avenir", sans-serif;
-	font-size: 13pt;
-	color: #80b3b3;
-	font-weight: 300;
+#chat-area{
+	background: white;
+	height: 100%;
+	margin-left: 220px;	
 }
 
 #title{
@@ -93,7 +118,62 @@ li a{
       margin-right: 5px;
     }
 
+#chat-header{
+	height: 56px;
+	border-bottom: 0.5px solid darkgray;
+	padding: 5px 15px;
 
+	color: black;
+	font-weight: bold;
+	font-size: 14pt
+}
+
+.chat-channel-btn{
+	border: none;
+	padding: 0;
+	background-color: white;
+
+	font-family: "Avenir", sans-serif;
+	font-style: italic;
+	color: gray;
+}
+
+#message-container{
+	height: 100%;
+	background-color: black;
+}
+
+#footer{
+	position: fixed;
+	margin-left: 220px;
+	height: 77px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	/*border-top: 0.5px solid darkgray;*/
+}
+
+#message-form{
+	padding: 0px 20px;
+}
+
+#message-textarea{
+	max-height: 22px;
+	width: 100%;
+	top: 0;
+	right: 0;
+	left: 0;
+	border-radius: 10px;
+	padding: 10px 22px;
+	margin-right: 220px;
+
+	font-family: "Avenir", sans-serif;
+	font-size: 12pt;
+}
+
+.a-message{
+	min-height: 50px;
+}
 
 
 

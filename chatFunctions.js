@@ -80,3 +80,11 @@ function createRoom() {
   console.log(name);
   socketio.emit("create_chat", {roomname:name, creator:currentuser})
 }
+
+$("#message-textarea").keyup(function(e){
+  var code = (e.keyCode ? e.keyCode : e.which);
+  if(code == 13){
+    alert("Pressed enter");
+  }
+});
+

@@ -2,77 +2,88 @@
 <html>
    <head>
      <link rel="stylesheet" type="text/css" href="chat.css"></link>
-      <script src="/socket.io/socket.io.js"></script>
-      <script src="chatFunctions.js"></script>
+     <!-- Links to JQUERY stylesheet and JavaScript source -->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
    </head>
    <body>
-<!--      <div id="userlist">
-     <input type="text" id="name">
-     <button onclick="enterRoom()" id="enter_btn">Enter</button>
-     <div id="currentusers"></div>
-   </div>
-   <hr>
-   <div id="chatrooms" style="visibility:hidden">
-     <input type="text" id="create_chat" />
-     <button onclick="createRoom()">Create chatroom</button>
-     <div id="rooms">
-     <p id="lobby">Lobby</p>
-   </div><hr>
-   </div>
-
-   <div id="messaging" style="visibility:hidden">
-      <input type="text" id="message_input"/>
-      <button onclick="sendMessage()">send</button>
-      <div id="chatlog"></div>
-    </div> -->
-
-    <div id="sidePanel">
-      <div id="title">
-        <h1>ChatterBox</h1>
-        <div id="circle"></div>
-        <p id="username">zelataino</p>
-      </div>
-      <div id="channels" class="sidePanelSection">
-        <button class="add-btn">+</button>
-        <h2>CHANNELS</h2>
-        <ul>
-          <li>
-            <a href="https://google.com"># cse330</a>
-          </li>
-          <li>
-            <a href="https://google.com"># wics</a>
-          </li>
-          <li>
-            <a href="https://google.com"># basketball</a>
-          </li>
-        </ul>
-      </div>
-      <div id="directMessages" class="sidePanelSection">
-        <button class="add-btn">+</button>
-        <h2>DIRECT MESSAGES</h2>
-        <ul>
-          <li>
-            <a href="https://google.com">
-              <div id="circle"></div>
-              amprince
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              <div id="circle"></div>
-              becca.siow
-            </a>
-          </li>
-          <li>
-            <a href="https://google.com">
-              <div id="circle"></div>
-              b.little
-            </a>
-          </li>
-        </ul>
-      </div>
+    <div class="container">
+    	<div id="sidePanel">
+	      <div id="title">
+	        <h1>ChatterBox</h1>
+	        <div id="circle"></div>
+	        <p id="username">zelataino</p>
+	      </div>
+	      <div id="channels" class="sidePanelSection">
+	        <button class="add-btn">+</button>
+	        <h2>CHANNELS</h2>
+	        <ul>
+	          <li>
+	            <a href="https://google.com"># cse330</a>
+	          </li>
+	          <li>
+	            <a href="https://google.com"># wics</a>
+	          </li>
+	          <li>
+	            <a href="https://google.com"># basketball</a>
+	          </li>
+	        </ul>
+	      </div>
+	      <div id="directMessages" class="sidePanelSection">
+	        <button class="add-btn">+</button>
+	        <h2>DIRECT MESSAGES</h2>
+	        <ul>
+	          <li>
+	            <a href="https://google.com">
+	              <div id="circle"></div>
+	              amprince
+	            </a>
+	          </li>
+	          <li>
+	            <a href="https://google.com">
+	              <div id="circle"></div>
+	              becca.siow
+	            </a>
+	          </li>
+	          <li>
+	            <a href="https://google.com">
+	              <div id="circle"></div>
+	              b.little
+	            </a>
+	          </li>
+	        </ul>
+	      </div>
+	    </div>
+	    <!-- END RIGHT PANEL DIV -->
+	    <div id="chat-area">
+	    	<header id="chat-header">
+	    		<div id="chat-channel">
+	    			# cse330
+	    		</div>
+	    		<div>
+	    			<button class="chat-channel-btn">View members</button>
+	    		</div>
+	    	</header>
+	    	<div id="chat-body">
+	    		<div id="footer">
+	    			<form id="message-form">
+	    				<textarea id="message-textarea" on>Hey, want to meet up</textarea>
+	    			</form>
+	    		</div>
+	    		<div id="message-container">
+	    			<div class="a-message">
+	    				<h4>zelataino</h4>
+	    				<p>That sounds great!</p>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div> 
+	    <!-- END LEFT AREA DIV -->
     </div>
-
-
+    <!-- END CONTAINER DIV -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chatFunctions.js"></script>
    </body>
 </html>
