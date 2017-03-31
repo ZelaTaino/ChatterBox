@@ -38,6 +38,12 @@ h2{
 	font-weight: 500;
 }
 
+h4{
+	margin: 0;
+	font-size: 11pt;
+	color: black;
+}
+
 ul {
 	list-style: none;
 	margin: 0;
@@ -151,7 +157,7 @@ li a{
 
 #message-container{
 	height: 100%;
-	background-color: black;
+	/*background-color: black;*/
 }
 
 #footer{
@@ -184,6 +190,19 @@ li a{
 
 .a-message{
 	min-height: 50px;
+	padding: 10px 20px;
+	border-top: 1px;
+	border-bottom: 1px;
+	border-left: 0;
+	border-right: 0;
+	border-color: lightgrey;
+	border-style: solid;
+}
+
+.a-message p {
+	margin: 0px;
+	color: black;
+	font-size: 12pt;
 }
 
 
