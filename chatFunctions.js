@@ -69,10 +69,10 @@ $(document).on("click", "#login_btn", function() {
   }
 
 });
-$(document).on("click", ".add-btn", function () {
-  $("#sidePanel").hide();
-  $("#")
-});
+// $(document).on("click", ".add-btn", function () {
+//   $("#sidePanel").hide();
+//   $("#")
+// });
 
 //Send message
 function sendMessage(){
@@ -101,10 +101,20 @@ function createRoom() {
   socketio.emit("create_chat", {roomname:name, creator:currentuser})
 }
 
+// $("#add-chatroom-btn").on(function(event){
+//   alert("pressed");
+//   $("add-chatroom-view").fadeIn();
+// });
+
+$(document).on("click", "#add-chatroom-btn", function(){
+  $("#add-chatroom-view").fadeIn();
+});
+
 $("#message-textarea").keyup(function(e){
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
     alert("Pressed enter");
   }
 });
+
 

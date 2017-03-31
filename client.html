@@ -9,7 +9,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
    </head>
    <body>
-    <div class="container">
+    <div class="wrapper">
     	<div id="sidePanel">
 	      <div id="title">
 	        <h1>ChatterBox</h1>
@@ -17,7 +17,7 @@
 	        <p id="username">zelataino</p>
 	      </div>
 	      <div id="channels" class="sidePanelSection">
-	        <button class="add-btn">+</button>
+	        <button class="add-btn" id="add-chatroom-btn">+</button>
 	        <h2>CHANNELS</h2>
 	        <ul>
 	          <li>
@@ -83,6 +83,13 @@
 	    <!-- END LEFT AREA DIV -->
     </div>
     <!-- END CONTAINER DIV -->
+    <div id="add-chatroom-view" class="fullscreen-view">
+    	<div id="fullscreen-view-wrapper">
+    		<button id="cancel-add-chatroom"><img src="img/cancel.png" class="cancel-btn"></button>
+    			<input type="text" name="chatroom-title" id="chatroom-title">
+    		</div>
+    	</div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="chatFunctions.js"></script>
    </body>

@@ -9,6 +9,11 @@
 }
 */
 
+html{
+	height: 100%;
+	position: relative;
+}
+
 body{
 	margin: 0;
 	user-select: none;
@@ -16,14 +21,15 @@ body{
     overflow-y: hidden;
     overflow-x: hidden;
     flex-direction: column;
-    height: 100%;
-    min-width: 768px;
 	display: flex;
-
+    width: 100%;
+    height: 100%;
 	font-family: "Avenir", sans-serif;
 	font-size: 13pt;
 	color: #80b3b3;
 	font-weight: 300;
+
+	position: relative;
 }
 
 h1{
@@ -63,9 +69,16 @@ li a{
   display: none;
 }
 
-.container{
-	height: 100%;
-	overflow: auto;
+.wrapper{
+	/*height: 100%;*/
+	/*overflow: auto;*/
+
+	margin-top:10px;
+ 
+    position:relative;
+    width: 100%;
+    margin: 0px auto;
+    height:100%;
 }
 
 #login_screen {
@@ -76,7 +89,7 @@ li a{
 }
 
 #sidePanel{
-  display: none;
+/*  display: none;
 	height: 100%;
 	width: 200px;
 	float: left;
@@ -85,14 +98,28 @@ li a{
 	z-index: 1;
 	top: 0;
 	left: 0;
+	display: block;*/
+
+	height: auto;
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	background: darkslategray;
 	padding: 20px 20px 20px 0px;
-	display: block;
+	width: 200px;
 }
 
 #chat-area{
-	background: white;
+/*	background: white;
 	height: 100%;
-	margin-left: 220px;	
+	margin-left: 220px;	*/
+	position:absolute;
+	top:0;
+	right:0;
+	bottom:0;
+	left:220px;  
+	/*background:blue; */
 }
 
 #title{
@@ -114,6 +141,7 @@ li a{
 	background: none;
 	border: 1px solid #80b3b3;
 	color: #80b3b3;
+	outline: none;
 
 	float: right;
 	display: inline-block;
@@ -162,11 +190,11 @@ li a{
 
 #footer{
 	position: fixed;
-	margin-left: 220px;
 	height: 77px;
 	right: 0;
 	bottom: 0;
-	left: 0;
+	left: 220px;
+	width: 80%;
 	/*border-top: 0.5px solid darkgray;*/
 }
 
@@ -203,6 +231,58 @@ li a{
 	margin: 0px;
 	color: black;
 	font-size: 12pt;
+}
+
+.fullscreen-view{
+	position: absolute;
+	height: 100%;
+	width: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: lightblue;
+	padding: 2% 5%
+	/*display: none;*/
+}
+
+#fullscreen-view-wrapper{
+	background-color: white;
+}
+
+#cancel-add-chatroom{
+	font-family: "Avenir", sans-serif;
+	font-size: 50pt;
+	font-weight: 500;
+	outline: none;
+	background: none;
+	border-style: none;
+	display: inline;
+	right: 0;
+	float: right;
+}
+
+.cancel-btn:hover{
+	opacity: 0.7;
+}
+
+#chatroom-title{
+/*	height: 60px;
+	width: 75%;*/
+	/*display: block;*/
+	/*margin: auto auto;*/
+
+	top: 50%;
+    left: 50%;
+    width:50em;
+    height:5em;
+    margin-top: -2.5em; /*set to a negative number 1/2 of your height*/
+    margin-left: -25em; /*set to a negative number 1/2 of your width*/
+    position:fixed;
+
+    font-family: "Avenir", sans-serif;
+    font-weight: 500;
+   	font-size: 20pt;
 }
 
 
