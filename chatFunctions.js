@@ -5,11 +5,18 @@ var login_page = $("#login_screen");
 var mainscreen = $("sidePanel");
 
 //sends messages
-socketio.on("message_to_client",function(data) {
-   //Append an HR thematic break and the escaped HTML of the new message
-   console.log(data);
-   document.getElementById("chatlog").appendChild(document.createElement("hr"));
-   document.getElementById("chatlog").appendChild(document.createTextNode(data['messagewriter'] + ": " + data['message']));
+
+socketio.on("message_to_client", function(data) {
+  console.log(data);
+  var messagediv = document.createElement("div");
+  messagediv.setAttribute("class", "a-message");
+  var name = document.createElement("h4");
+  var msg = document.createElement("p");
+  name.innerHTML = data["messagewriter"];
+  msg.innerHTML = data["message"];
+  messagediv.appendChild(name);
+  messagediv.appendChild(msg);
+  document.getElementById("message-container").appendChild(messagediv);
 });
 
 //user enter chatroom
@@ -116,16 +123,16 @@ function sendMessage(){
 }
 
 
-function enterRoom(){
-  var user = document.getElementById("name").value;
-  document.getElementById("name").style.visibility = "hidden";
-  document.getElementById("enter_btn").style.visibility = "hidden"
-  document.getElementById("chatrooms").style.visibility = "visible";
-  document.getElementById("messaging").style.visibility = "visible";
-
-  currentuser = user;
-  socketio.emit("user_entering", {newuser:user});
-}
+// function enterRoom(){
+//   var user = document.getElementById("name").value;
+//   document.getElementById("name").style.visibility = "hidden";
+//   document.getElementById("enter_btn").style.visibility = "hidden"
+//   document.getElementById("chatrooms").style.visibility = "visible";
+//   document.getElementById("messaging").style.visibility = "visible";
+//
+//   currentuser = user;
+//   socketio.emit("user_entering", {newuser:user});
+// }
 
 function addUser(username)  {
   var li = document.createElement("li");
@@ -165,10 +172,23 @@ $(document).on("click", "#add-chatroom-btn", function(){
 });
 
 $("#message-textarea").keyup(function(e){
+  var usr = currentuser;
+  var msg = document.getElementById("message-textarea").value;
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
-    alert("Pressed enter");
+     socketio.emit("message_to_server", {message:msg, messagewriter:usr});
   }
 });
 
-
+$("#login_name").keyup(function(e){
+//  console.log("");
+  var code = (e.keyCode ? e.keyCode : e.which);
+  if(code == 13){
+    console.log("Enter");
+    var user = document.getElementById("login_name").value;
+    $("#login_view.fullscreen-view").fadeOut();
+    $(".wrapper").show();
+    currentuser = user;
+    console.log(currentuser);
+  }
+});
