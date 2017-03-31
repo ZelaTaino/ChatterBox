@@ -69,7 +69,7 @@ io.sockets.on("connection", function(socket){
 		var name = data["roomname"];
 		console.log("room name: "+data["roomname"]);
 		createRoom(data["roomname"], data["creator"]);
-		//console.log(rooms);
+		//console.log(rooms);``
 		io.sockets.emit("room_created", {roomname: rooms[name]});
 
 	});

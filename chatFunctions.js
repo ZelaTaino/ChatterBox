@@ -1,13 +1,15 @@
 //var users = [];
 var currentuser;
 var socketio = io.connect();
-var login_page = $("#login_screen");
-var mainscreen = $("sidePanel");
+var currentroom;
+
 
 //sends messages
 
 socketio.on("message_to_client", function(data) {
   console.log(data);
+  var messagecont = document.createElement("div");
+  messagecont.setAttribute("id", "message-container");
   var messagediv = document.createElement("div");
   messagediv.setAttribute("class", "a-message");
   var name = document.createElement("h4");
@@ -65,18 +67,18 @@ socketio.on("room_created", function(data) {
 });
 
 //displays all users in a room in str format
-function createString(list) {
-  var userstring = "";
-  for (var key in list) {
-    if (list.hasOwnProperty(key)) {
-
-      console.log(key + " -> " + list[key]);
-      userstring += list[key] + ", ";
-    }
-  }
-  console.log(userstring);
-  return userstring
-}
+// function createString(list) {
+//   var userstring = "";
+//   for (var key in list) {
+//     if (list.hasOwnProperty(key)) {
+//
+//       console.log(key + " -> " + list[key]);
+//       userstring += list[key] + ", ";
+//     }
+//   }
+//   console.log(userstring);
+//   return userstring
+// }
 
 
 $(document).on("click", "#login_btn", function() {
@@ -111,6 +113,7 @@ $(document).on("click", "#newroom", function () {
     console.log(newroomname);
     $("addChat").hide();
     $("#sidePanel").show();
+
   }
 
 });
@@ -153,14 +156,25 @@ function addUser(username)  {
 
 function createRoomElement (roomname) {
   var li = document.createElement("li");
-  var a = document.createElement("p");
+  var a = document.createElement("a");
+  a.setAttribute("id", roomname);
+  a.href = "";
+  a.setAttribute("class", "rooms");
+  a.innerHTML = "# " + roomname;
   li.appendChild(a);
-  p.setAttribute("id", roomname);
-  p.setAttribute("class", rooms);
-  p.innerHTML = "# " + roomname;
   document.getElementById("chatrooms").appendChild(li);
 
 }
+
+
+$(document).on("click", ".rooms", function() {
+  currentroom = event.target.id;
+  console.log(currentroom);
+  document.getElementById("chat-channel").innerHTML = currentroom;
+}
+);
+
+
 
 // $("#add-chatroom-btn").on(function(event){
 //   alert("pressed");
@@ -171,24 +185,59 @@ $(document).on("click", "#add-chatroom-btn", function(){
   $("#add-chatroom-view").fadeIn();
 });
 
+$("#chatroom-title").keyup(function(e) {
+  var newroomname = document.getElementById("chatroom-title").value;
+  var code = (e.keyCode ? e.keyCode : e.which);
+  if(code == 13){
+    console.log(newroomname);
+    if (newroomname.length > 2) {
+     socketio.emit("create_chat", {creator: currentuser, roomname:newroomname});
+     $("chatroom-title").val("");
+     $("#add-chatroom-view.fullscreen-view").fadeOut();
+     $(".wrapper").show();
+     $("#sidePanel").show();
+    //  $("#chatroom-title").val("");
+
+    }
+  }
+});
+
+
+
+$(document).on("click", "#cancel-add-chatroom", function() {
+  $("#add-chatroom-view").fadeOut();
+  $("#sidePanel").show();
+  console.log("cancelled");
+})
+
+
+// Sending message
 $("#message-textarea").keyup(function(e){
   var usr = currentuser;
   var msg = document.getElementById("message-textarea").value;
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
      socketio.emit("message_to_server", {message:msg, messagewriter:usr});
+     $("#message-textarea").val("");
   }
 });
 
+
+// Login screen
 $("#login_name").keyup(function(e){
 //  console.log("");
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
     console.log("Enter");
     var user = document.getElementById("login_name").value;
-    $("#login_view.fullscreen-view").fadeOut();
+    $("#add-chatroom-view.fullscreen-view").hide();
+    $("#login-view.fullscreen-view").fadeOut();
     $(".wrapper").show();
     currentuser = user;
-    console.log(currentuser);
+    currentroom = lobby;
+    socketio.emit("user_entering", {newuser: user});
+    document.getElementById('username').innerHTML = user;
+    // console.log("Entering");
+    // console.log(currentuser);
   }
 });
