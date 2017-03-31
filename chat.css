@@ -241,7 +241,7 @@ li a{
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: lightblue;
+	background-color: white;
 	padding: 2% 5%
 	/*display: none;*/
 }
@@ -274,15 +274,20 @@ li a{
 
 	top: 50%;
     left: 50%;
-    width:50em;
-    height:5em;
-    margin-top: -2.5em; /*set to a negative number 1/2 of your height*/
-    margin-left: -25em; /*set to a negative number 1/2 of your width*/
+    width:15em;
+    height:1em;
+    margin-top: -0.5em; /*set to a negative number 1/2 of your height*/
+    margin-left: -7.5em; /*set to a negative number 1/2 of your width*/
     position:fixed;
+
+    border-style: none;
+    border-bottom: 2px solid lightgray;
 
     font-family: "Avenir", sans-serif;
     font-weight: 500;
-   	font-size: 20pt;
+   	font-size: 50pt;
+
+   	outline: none;
 }
 
 
