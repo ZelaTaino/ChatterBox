@@ -17,7 +17,17 @@ socketio.on("user_entering", function(data) {
   var x = document.createElement("p");
   var users = data['newuser'];
   console.log(users);
-  document.getElementById("currentusers").innerHTML = createString(users);
+  for (var key in users) {
+    if (users.hasOwnProperty(key)) {
+      console.log(key + " -> " + users[key]);
+      if (users[key] != currentuser) {
+        addUser(users[key]);
+
+      }
+    }
+  }
+
+  // document.getElementById("currentusers").innerHTML = createString(users);
   //document.getElementById("currentusers").appendChild(document.createTextNode(userstring));
 });
 
@@ -26,6 +36,7 @@ socketio.on("change_message", function(data) {
   var li = document.createElement("li");
   var circle = document.createElement("div");
   circle.setAttribute("id", "circle");
+
   console.log(data["roomlist"]);
   console.log(data["message"]);
   document.getElementById("currentusers").innerHTML = createString(data["roomlist"]);
@@ -36,11 +47,12 @@ socketio.on("change_message", function(data) {
 //creates a chatroom
 socketio.on("room_created", function(data) {
   var name = data["roomname"];
-  var roomelement = document.createElement("p")
-  roomelement.setAttribute("id", name);
-  roomelement.innerHTML = name;
+  // var roomelement = document.createElement("p");
+  // roomelement.setAttribute("id", name);
+  // roomelement.innerHTML = name;
   console.log(name.roomname);
-  document.getElementById("rooms").appendChild(roomelement);
+  createRoomElement(name.roomname);
+  // document.getElementById("rooms").appendChild(roomelement);
   //document.getElementById("rooms").appendChild(document.createTextNode(data["roomname"]));
   console.log(data["roomname"]);
 });
@@ -59,21 +71,42 @@ function createString(list) {
   return userstring
 }
 
+
 $(document).on("click", "#login_btn", function() {
   var username = document.getElementById("login_name").value;
   if (username.length > 2) {
     $("#login_screen").fadeOut();
     $("#sidePanel").show();
+    currentuser = username;
+    socketio.emit("user_entering", {newuser: username});
     document.getElementById('username').innerHTML = username;
     console.log("Entering");
   }
 
 });
+
 // $(document).on("click", ".add-btn", function () {
 //   $("#sidePanel").hide();
 //   $("#")
 // });
 
+$(document).on("click", ".add-btn", function () {
+  $("#sidePanel").hide();
+  $("#addChat").show();
+});
+
+
+$(document).on("click", "#newroom", function () {
+  console.log("Pressed");
+  var newroomname = document.getElementById("roomname").value;
+  if (newroomname.length > 2) {
+    socketio.emit("create_chat", {roomname:newroomname, creator:currentuser})
+    console.log(newroomname);
+    $("addChat").hide();
+    $("#sidePanel").show();
+  }
+
+});
 //Send message
 function sendMessage(){
    var msg = document.getElementById("message_input").value;
@@ -94,11 +127,32 @@ function enterRoom(){
   socketio.emit("user_entering", {newuser:user});
 }
 
+function addUser(username)  {
+  var li = document.createElement("li");
+  var circle = document.createElement("div");
+  circle.setAttribute("id", "circle");
+  li.appendChild(circle);
+  li.innerHTML = username;
+  document.getElementById("userlist").appendChild(li);
+  console.log(username);
 
-function createRoom() {
-  var name = document.getElementById("create_chat").value;
-  console.log(name);
-  socketio.emit("create_chat", {roomname:name, creator:currentuser})
+}
+
+// function createRoom() {
+//   var name = document.getElementById("create_chat").value;
+//   console.log(name);
+//   socketio.emit("create_chat", {roomname:name, creator:currentuser})
+// }
+
+function createRoomElement (roomname) {
+  var li = document.createElement("li");
+  var a = document.createElement("p");
+  li.appendChild(a);
+  p.setAttribute("id", roomname);
+  p.setAttribute("class", rooms);
+  p.innerHTML = "# " + roomname;
+  document.getElementById("chatrooms").appendChild(li);
+
 }
 
 // $("#add-chatroom-btn").on(function(event){
