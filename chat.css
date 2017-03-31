@@ -53,13 +53,24 @@ li a{
 	text-decoration: none;
 	padding: 5px 20px;
 }
+#addChat {
+  display: none;
+}
 
 .container{
 	height: 100%;
 	overflow: auto;
 }
 
+#login_screen {
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  position: absolute;
+}
+
 #sidePanel{
+  display: none;
 	height: 100%;
 	width: 200px;
 	float: left;
@@ -174,8 +185,5 @@ li a{
 .a-message{
 	min-height: 50px;
 }
-
-
-
 
 
