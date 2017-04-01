@@ -16,6 +16,8 @@ socketio.on("message_to_client", function(data) {
   var msg = document.createElement("p");
   name.innerHTML = data["messagewriter"];
   msg.innerHTML = data["message"];
+  console.log(currentroom);
+  console.log(data["room"]);
 
   if (currentroom == data["room"]) {
     messagediv.appendChild(name);
@@ -121,6 +123,10 @@ $(document).on("click", "#add-chatroom-btn", function(){
   $("#add-chatroom-view").fadeIn();
 });
 
+$(document).on("click", "#add-dm-btn", function(){
+  $("#dm-view").fadeIn();
+});
+
 $("#chatroom-title").keyup(function(e) {
   var newroomname = document.getElementById("chatroom-title").value;
   var code = (e.keyCode ? e.keyCode : e.which);
@@ -132,7 +138,6 @@ $("#chatroom-title").keyup(function(e) {
      $("chatroom-title").val("");
      $("#add-chatroom-view.fullscreen-view").fadeOut();
      $(".wrapper").show();
-     $("#sidePanel").show();
      $("#chatroom-title").val("");
     }
   }
@@ -141,8 +146,10 @@ $("#chatroom-title").keyup(function(e) {
 
 $(document).on("click", "#cancel-add-chatroom", function() {
   $("#add-chatroom-view").fadeOut();
-  $("#sidePanel").show();
-  // console.log("cancelled");
+});
+
+$(document).on("click", "#cancel-add-dm", function() {
+  $("#dm-view").fadeOut();
 });
 
 
@@ -158,21 +165,18 @@ $("#message-textarea").keyup(function(e){
 });
 
 
-
-
 // Login screen
 $("#login_name").keyup(function(e){
-//  console.log("");
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
     var user = document.getElementById("login_name").value;
     currentuser = user;
     socketio.emit("get_current_rooms", {user: currentuser});
     $("#add-chatroom-view.fullscreen-view").hide();
+    $("#dm-view.fullscreen-view").hide();
     $("#login-view.fullscreen-view").fadeOut();
     $(".wrapper").show();
     currentroom = "lobby";
-    
     socketio.emit("user_entering", {newuser: user, room: currentroom});
     document.getElementById('username').innerHTML = user;
 
@@ -181,6 +185,5 @@ $("#login_name").keyup(function(e){
 
 
 $(document).on("click", ".add-btn", function () {
-  $("#sidePanel").hide();
   $("#addChat").show();
 });
