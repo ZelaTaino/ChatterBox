@@ -55,15 +55,15 @@ io.sockets.on("connection", function(socket){
 	socket.on('message_to_server', function(data) {
 		// This callback runs when the server receives a new message from the client.
 
-		console.log("message: "+data["message"]); // log it to the Node.JS output
-		io.sockets.emit("message_to_client",{message:data["message"], messagewriter:data["messagewriter"] }) // broadcast the message to other users
+		console.log("message: "+data["room"]); // log it to the Node.JS output
+		io.sockets.emit("message_to_client",{message:data["message"], messagewriter:data["messagewriter"], room: data["room"] }) // broadcast the message to other users
 	});
 	socket.on('user_entering', function(data) {
 		console.log("new user: "+data["newuser"]);
 		socketids[socket.id] = data["newuser"];
 		users.push(data["newuser"]);
 		var lobby = data["room"];
-		io.sockets.emit("user_entering",{newuser:socketids, room: lobby})
+		io.sockets.emit("user_entering",{newuser:socketids, room: "lobby"})
 	});
 	socket.on("create_chat", function(data) {
 		console.log("creator: "+data["creator"]);
@@ -74,13 +74,23 @@ io.sockets.on("connection", function(socket){
 		io.sockets.emit("room_created", {roomname: rooms[name]});
 
 	});
+	socket.on("get_current_rooms", function(data) {
+		var user = data["user"];
+		io.sockets.emit("room_return", {allrooms: rooms, req: user })
+	});
+	socket.on("join_room", function(data) {
+		var roomjoin = data["room"];
+		var user = data["user"];
+		rooms[roomjoin].users.push(user);
+	}
+);
 
 	socket.on("disconnect", function() {
 		console.log("disconnecting from server");
 		console.log(socket.id);
 		var name = socketids[socket.id];
 		delete socketids[socket.id];
-		io.sockets.emit("change_message", {message:name + " has left the room", roomlist:socketids});
+		io.sockets.emit("change_message", {message:name, roomlist:socketids});
 		//io.sockets.emit("userchange", {roomlist:socketids});
 
 
