@@ -79,12 +79,6 @@ li:hover{
 	background-color: #132020;
 }
 
-/*
-li a{
-	color: #80b3b3;
-	text-decoration: none;
-	padding: 5px 20px;
-}*/
 #addChat {
   display: none;
 }
@@ -286,9 +280,6 @@ li a{
 .cancel-btn:hover{
 	opacity: 0.7;
 }
-/*#add-chatroom-view {
-  /*display: none;
-}*/
 
 .fullscreen-textfield{
 	top: 50%;
