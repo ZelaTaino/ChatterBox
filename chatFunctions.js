@@ -147,6 +147,8 @@ $("#message-textarea").keyup(function(e){
   }
 });
 
+$().on();
+
 
 // Login screen
 $("#login_name").keyup(function(e){
