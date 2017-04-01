@@ -141,7 +141,6 @@ $("#message-textarea").keyup(function(e){
   var msg = document.getElementById("message-textarea").value;
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
-    
      socketio.emit("message_to_server", {message:msg, messagewriter:usr, room: currentroom});
      $("#message-textarea").val("");
   }

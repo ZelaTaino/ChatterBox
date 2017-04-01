@@ -103,6 +103,7 @@ function createRoom(roomname, maker) {
 		roomname: roomname,
 		creator: maker,
 		users: [maker]
+		
 	}
 	rooms[roomname] = room
 }
