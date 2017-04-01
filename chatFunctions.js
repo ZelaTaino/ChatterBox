@@ -165,9 +165,9 @@ $("#login_name").keyup(function(e){
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
     socketio.emit("get_current_rooms", {user: currentuser});
-    // console.log("Enter");
     var user = document.getElementById("login_name").value;
     currentuser = user;
+    socketio.emit("get_current_rooms", {user: currentuser});
     $("#add-chatroom-view.fullscreen-view").hide();
     $("#login-view.fullscreen-view").fadeOut();
     $(".wrapper").show();
