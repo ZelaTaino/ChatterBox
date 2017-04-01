@@ -106,6 +106,9 @@ function createRoomElement (roomname) {
 
 
 $(document).on("click", ".rooms", function() {
+  var leaveroom = currentroom;
+  socketio.emit("leaving_room", {user: currentuser, room: leaveroom});
+  console.log(leaveroom);
   console.log("room func");
   currentroom = event.target.id;
   console.log(currentroom);
@@ -119,6 +122,14 @@ $(document).on("click", ".rooms", function() {
 
 $(document).on("click", "#add-chatroom-btn", function(){
   $("#add-chatroom-view").fadeIn();
+});
+
+$(document).on("click", "#chat-channel-btn", function() {
+  socketio.emit("get_chatrooms_users", {room:currentroom});
+  $(".wrapper").hide();
+  $("#sidePanel").hide();
+  $("#userview").show();
+
 });
 
 $("#chatroom-title").keyup(function(e) {
