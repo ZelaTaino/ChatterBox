@@ -87,14 +87,16 @@ io.sockets.on("connection", function(socket){
 socket.on("leaving_room", function(data) {
 	var userleave = data["user"];
 	var room = data["room"];
+
 });
 socket.on("get_chatrooms_users", function(data) {
 	var room = data["room"];
 	console.log(rooms[room]);
-	
-	io.sockets.emit("showing_users", {users: })
-}
-)
+
+	io.sockets.emit("showing_users", {users: rooms[room].users})
+});
+
+
 
 	socket.on("disconnect", function() {
 		console.log("disconnecting from server");
