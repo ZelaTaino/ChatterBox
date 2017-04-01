@@ -62,7 +62,8 @@ io.sockets.on("connection", function(socket){
 		console.log("new user: "+data["newuser"]);
 		socketids[socket.id] = data["newuser"];
 		users.push(data["newuser"]);
-		io.sockets.emit("user_entering",{newuser:socketids})
+		var lobby = data["room"];
+		io.sockets.emit("user_entering",{newuser:socketids, room: lobby})
 	});
 	socket.on("create_chat", function(data) {
 		console.log("creator: "+data["creator"]);
