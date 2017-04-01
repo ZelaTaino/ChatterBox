@@ -16,13 +16,22 @@ socketio.on("message_to_client", function(data) {
   var msg = document.createElement("p");
   name.innerHTML = data["messagewriter"];
   msg.innerHTML = data["message"];
+
   if (currentroom == data["room"]) {
     messagediv.appendChild(name);
     messagediv.appendChild(msg);
+    var oldscrollheight = $("#chat-area").prop("scrollHeight") - 20;
+    console.log(oldscrollheight);
     document.getElementById("message-container").appendChild(messagediv);
+    var newscrollHeight = $("#chat-area").prop("scrollHeight");
+    console.log(newscrollHeight);
+    if(newscrollHeight > oldscrollheight){
+      $("#chat-area").animate({scrollTop: newscrollHeight}, 'slow');
+      console.log("ENTERED SHOULD SCROLLED");
+    }
   }
   else  {
-    console.log("Wrogn roomo ya dummy");
+    console.log("Wrong roomo ya dummy");
   }
 });
 

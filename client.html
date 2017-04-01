@@ -60,27 +60,33 @@
 	    </div>
 	    <!-- END RIGHT PANEL DIV -->
 	    <div id="chat-area">
-	    	<header id="chat-header">
-	    		<div id="chat-channel">
-	    			# lobby
+	    	<div id="chat-body"> <!--content-->
+				<header id="chat-header">
+		    		<div id="chat-channel">
+		    			# lobby
+		    		</div>
+		    		<div>
+		    			<button class="chat-channel-btn">View members</button>
+		    		</div>
+		    	</header>
+	    		<div id="scrollable-content">
+		    		<div id="message-container">
+		    			<!-- <div class="a-message"> -->
+		    				<!-- <h4>zelataino</h4>
+		    				<p>That sounds great!</p> -->
+		    			<!-- </div> -->
+		    		</div>
 	    		</div>
-	    		<div>
-	    			<button class="chat-channel-btn">View members</button>
-	    		</div>
-	    	</header>
-	    	<div id="chat-body">
 	    		<div id="footer">
 	    			<form id="message-form">
 	    				<textarea id="message-textarea" on></textarea>
 	    			</form>
 	    		</div>
-	    		<div id="message-container">
-	    			<!-- <div class="a-message"> -->
-	    				<!-- <h4>zelataino</h4>
-	    				<p>That sounds great!</p> -->
-	    			<!-- </div> -->
-	    		</div>
 	    	</div>
+
+
+
+
 	    </div>
 	    <!-- END LEFT AREA DIV -->
     </div>
@@ -88,13 +94,15 @@
     <div id="add-chatroom-view" class="fullscreen-view">
     	<div id="fullscreen-view-wrapper">
     		<button id="cancel-add-chatroom"><img src="img/cancel.png" class="cancel-btn"></button>
-    			<input type="text" name="chatroom-title" id="chatroom-title" placeholder="Channel name">
+    			<input type="text" name="chatroom-title" id="chatroom-title" placeholder="Channel name" class="fullscreen-textfield">
     		</div>
     	</div>
     	</div>
       <div id="login-view" class="fullscreen-view">
         <div id="fullscreen-view-wrapper">
-            <input type="text" name="login" id="login_name" placeholder="Enter Username">
+
+            <input type="text" name="login" id="login_name" placeholder="User name" class="fullscreen-textfield">
+
           </div>
       </div>
       <script src="/socket.io/socket.io.js"></script>
