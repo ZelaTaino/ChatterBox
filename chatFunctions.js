@@ -16,6 +16,8 @@ socketio.on("message_to_client", function(data) {
   var msg = document.createElement("p");
   name.innerHTML = data["messagewriter"];
   msg.innerHTML = data["message"];
+  console.log(currentroom);
+  console.log(data["room"]);
 
   if (currentroom == data["room"]) {
     messagediv.appendChild(name);
@@ -24,7 +26,7 @@ socketio.on("message_to_client", function(data) {
     console.log(oldscrollheight);
     document.getElementById("message-container").appendChild(messagediv);
     var newscrollHeight = $("#chat-area").prop("scrollHeight");
-    console.log(newscrollHeight);
+    console.log(newscrollHeight);  
     if(newscrollHeight > oldscrollheight){
       $("#chat-area").animate({scrollTop: newscrollHeight}, 'slow');
       console.log("ENTERED SHOULD SCROLLED");
@@ -65,7 +67,6 @@ socketio.on("room_return", function(data) {
   var req = data["req"];
   if (req == currentuser) {
     for(var key in rooms) {
-      // console.log(rooms[key]);
       createRoomElement(rooms[key].roomname);
     }
   }
@@ -119,6 +120,10 @@ $(document).on("click", "#add-chatroom-btn", function(){
   $("#add-chatroom-view").fadeIn();
 });
 
+$(document).on("click", "#add-dm-btn", function(){
+  $("#dm-view").fadeIn();
+});
+
 $("#chatroom-title").keyup(function(e) {
   var newroomname = document.getElementById("chatroom-title").value;
   var code = (e.keyCode ? e.keyCode : e.which);
@@ -130,7 +135,6 @@ $("#chatroom-title").keyup(function(e) {
      $("chatroom-title").val("");
      $("#add-chatroom-view.fullscreen-view").fadeOut();
      $(".wrapper").show();
-     $("#sidePanel").show();
      $("#chatroom-title").val("");
     }
   }
@@ -139,8 +143,10 @@ $("#chatroom-title").keyup(function(e) {
 
 $(document).on("click", "#cancel-add-chatroom", function() {
   $("#add-chatroom-view").fadeOut();
-  $("#sidePanel").show();
-  // console.log("cancelled");
+});
+
+$(document).on("click", "#cancel-add-dm", function() {
+  $("#dm-view").fadeOut();
 });
 
 
@@ -155,24 +161,19 @@ $("#message-textarea").keyup(function(e){
   }
 });
 
-$().on();
-
 
 // Login screen
 $("#login_name").keyup(function(e){
-//  console.log("");
   var code = (e.keyCode ? e.keyCode : e.which);
   if(code == 13){
     socketio.emit("get_current_rooms", {user: currentuser});
-    // console.log("Enter");
     var user = document.getElementById("login_name").value;
     currentuser = user;
     $("#add-chatroom-view.fullscreen-view").hide();
+    $("#dm-view.fullscreen-view").hide();
     $("#login-view.fullscreen-view").fadeOut();
     $(".wrapper").show();
     currentroom = "lobby";
-    // console.log(currentroom);
-    // console.log(currentuser);
     socketio.emit("user_entering", {newuser: user, room: currentroom});
     document.getElementById('username').innerHTML = user;
 
@@ -181,6 +182,5 @@ $("#login_name").keyup(function(e){
 
 
 $(document).on("click", ".add-btn", function () {
-  $("#sidePanel").hide();
   $("#addChat").show();
 });
