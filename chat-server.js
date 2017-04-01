@@ -84,6 +84,10 @@ io.sockets.on("connection", function(socket){
 		rooms[roomjoin].users.push(user);
 	}
 );
+socket.on("leaving_room", function(data) {
+	var userleave = data["user"];
+	var room = data["room"];
+})
 
 	socket.on("disconnect", function() {
 		console.log("disconnecting from server");

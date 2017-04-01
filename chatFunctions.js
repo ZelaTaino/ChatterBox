@@ -106,6 +106,9 @@ function createRoomElement (roomname) {
 
 
 $(document).on("click", ".rooms", function() {
+  var leaveroom = currentroom;
+  socketio.emit("leaving_room", {user: currentuser, room: leaveroom});
+  console.log(leaveroom);
   console.log("room func");
   currentroom = event.target.id;
   console.log(currentroom);
