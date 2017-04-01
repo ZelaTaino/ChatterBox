@@ -18,7 +18,19 @@ socketio.on("message_to_client", function(data) {
   msg.innerHTML = data["message"];
   messagediv.appendChild(name);
   messagediv.appendChild(msg);
+
+  var oldscrollheight = $("#chat-area").prop("scrollHeight") - 20;
+  console.log(oldscrollheight);
+
   document.getElementById("message-container").appendChild(messagediv);
+
+  var newscrollHeight = $("#chat-area").prop("scrollHeight");
+  console.log(newscrollHeight);
+  if(newscrollHeight > oldscrollheight){
+    $("#chat-area").animate({scrollTop: newscrollHeight}, 'slow');
+    console.log("ENTERED SHOULD SCROLLED");
+  }
+
 });
 
 //user enter chatroom
