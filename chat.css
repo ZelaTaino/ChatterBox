@@ -4,11 +4,6 @@
 
 }
 
-#rooms {
-  float:right;
-}
-*/
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: lightgray;
 }
@@ -296,4 +291,8 @@ li:hover{
 input[type="checkbox"]{
 	width: 30px;
 	height: 30px;
+}
+
+#username-div{
+	display: inline-block;
 }
